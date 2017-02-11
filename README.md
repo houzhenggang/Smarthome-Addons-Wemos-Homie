@@ -17,3 +17,9 @@ a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display, OTA and captive
 
 
 ----
+
+Please note:
+
+you have to solder a little bit for voltage metering and deepsleep :-).
+1. deepsleep - bridge DO & RST
+2. voltage metering - 180k Ohm resistor between WeMos BatteryShield +Vbat & A0
