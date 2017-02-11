@@ -22,6 +22,6 @@ Please note:
 
 you have to solder a little bit for voltage metering and deepsleep :-).
 
-1. deepsleep - bridge DO & RST
+1. deepsleep - bridge D0 & RST
 
 2. voltage metering - 180k Ohm resistor between WeMos BatteryShield +Vbat & A0
