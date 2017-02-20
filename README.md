@@ -7,13 +7,10 @@ with this code and some hardware (cheap development boards and shields), you are
 available objects:
 
 1. __connectedobject SensorNode__,
-a temperature/humidity sensor, mqtt enabled, OTA and captive portal to configure.
+a temperature/humidity sensor, mqtt enabled, OTA, (option: wemos battery shield with voltage control mod (need to solder) and deepsleep) and captive portal to configure.
 
-2. __connectedobject SensorNodeBattery__,
-a temperature/humidity sensor, mqtt enabled, OTA, deepsleep (need to solder), wemos battery shield with voltage control mod (need to solder) and captive portal to configure.
-
-3. __connectedobject SensorNodeDisplay__,
-a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display, OTA and captive portal to configure.
+2. __connectedobject DisplaySensorNode__,
+a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display (I2C or SPI), OTA and captive portal to configure.
 
 
 ----
