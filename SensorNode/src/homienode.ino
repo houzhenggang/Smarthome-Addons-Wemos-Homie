@@ -36,13 +36,13 @@
 const int DEFAULT_TEMPERATURE_INTERVAL = 300;
 
 // choose correct sensor and pin
-//DHT dht(D4, DHT22);
-DHT dht(D4, DHT11);
+DHT dht(D4, DHT22);
+//DHT dht(D4, DHT11);
 unsigned long lastTemperatureSent = 0, lastHumiditySent = 0;
 float temperature = 0, humidity = 0;
 #ifdef WITH_BATTERY
-  unsigned long lastVoltSent = 0
-  float volt = 0
+  unsigned long lastVoltSent = 0;
+  float volt = 0;
 #endif
 
 
@@ -119,7 +119,7 @@ void loopHandler() {
 void setup() {
   Serial.begin(115200);
   Serial << endl << endl;
-  Homie_setFirmware("SensorNode", "1.1.0");
+  Homie_setFirmware("SensorNode", "1.1.1");
   Homie.setSetupFunction(setupHandler).setLoopFunction(loopHandler);
   temperatureNode.advertise("unit");
   temperatureNode.advertise("degrees");

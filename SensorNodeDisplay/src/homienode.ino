@@ -8,14 +8,14 @@
 // remove once to clean up spiffs
 //#define CLEAN_UP
 //choose correct display
-//#define I2C_DISPLAY
-#define SPI_DISPLAY
+#define I2C_DISPLAY
+//#define SPI_DISPLAY
 
 const int DEFAULT_TEMPERATURE_INTERVAL = 300;
 
 #define PIN_LED D0
-DHT dht(D4, DHT22);
-//DHT dht(D1, DHT11);
+//DHT dht(D4, DHT22);
+DHT dht(D4, DHT11);
 unsigned long lastTemperatureSent = 0, lastHumiditySent = 0, lastVoltSent = 0;
 float temperature = 0, humidity = 0;
 #ifdef I2C_DISPLAY
@@ -123,15 +123,11 @@ void onHomieEvent(const HomieEvent& event) {
 
 void setup() {
   Serial.begin(115200);
-  #ifdef I2C_DISPLAY
-    pinMode(D4, OUTPUT);
-    digitalWrite(D4, HIGH);
-  #endif
   delay(500);
   display.begin();
   display.clearBuffer();
   display.setFont(u8g2_font_ncenB08_tf);
-  Homie_setFirmware("DisplaySensorNode", "1.1.0");
+  Homie_setFirmware("DisplaySensorNode", "1.1.1");
   Homie.setLedPin(PIN_LED, LOW);
   Homie.onEvent(onHomieEvent);
   mqttClient.onMessage(onMqttMessage);
