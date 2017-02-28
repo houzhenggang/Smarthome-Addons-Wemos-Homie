@@ -10,7 +10,7 @@ available objects:
 a temperature/humidity sensor, mqtt enabled, OTA, (option: wemos battery shield with voltage control mod (need to solder) and deepsleep) and captive portal to configure.
 
 2. __connectedobject DisplaySensorNode__,
-a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display (I2C or SPI), OTA and captive portal to configure.
+a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display (I2C or SPI), OTA and captive portal to configure, an external temperature can be display by subscribing a topic via mqtt (the topic can be entered in captive portal). 
 
 
 ----
