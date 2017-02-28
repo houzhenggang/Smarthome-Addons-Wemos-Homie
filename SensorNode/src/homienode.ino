@@ -52,9 +52,7 @@ HomieNode humidityNode("humidity", "humidity");
   HomieNode voltNode("volt", "volt");
 #endif
 HomieSetting<long> temperatureIntervalSetting("temperatureInterval", "The temperature read interval in seconds");
-#ifdef WITH_BATTERY
-  HomieSetting<long> voltIntervalSetting("voltInterval", "The voltage read interval in seconds");
-#endif
+
 
 void setupHandler() {
   temperatureNode.setProperty("unit").send("c");
