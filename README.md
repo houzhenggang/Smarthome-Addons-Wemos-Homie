@@ -17,6 +17,7 @@ relay, mqtt enabled and captive portal to configure
 
 4. __connectedobject SonoffS20Node__,
 firmware for Snooff S20 to use it as a RelayNode
+
 ----
 
 Please note:
