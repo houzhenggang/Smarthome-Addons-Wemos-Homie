@@ -69,7 +69,7 @@ void setup() {
   pinMode(PIN_RELAY, OUTPUT);
   digitalWrite(PIN_RELAY, LOW);
 
-  Homie_setFirmware("SonoffS20", "1.1.1");
+  Homie_setFirmware("SonoffTouch", "1.1.1");
   Homie.setLedPin(PIN_LED, LOW).setResetTrigger(PIN_BUTTON, LOW, 5000);
 
   Homie.setSetupFunction(setupHandler);
