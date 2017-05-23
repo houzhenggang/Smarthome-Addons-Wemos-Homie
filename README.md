@@ -16,7 +16,10 @@ a temperature/humidity sensor, mqtt enabled, 0.96" OLED Display (I2C or SPI), OT
 relay, mqtt enabled and captive portal to configure
 
 4. __connectedobject SonoffS20Node__,
-firmware for Snooff S20 to use it as a RelayNode
+firmware for Sonoff S20 to use it as a RelayNode
+
+4. __connectedobject SonoffTouchNode__,
+firmware for Sonoff Touch to use it as a RelayNode
 
 ----
 
@@ -27,3 +30,4 @@ you have to solder a little bit for voltage metering and deepsleep :-).
 1. deepsleep - bridge D0 & RST
 
 2. voltage metering - 180k Ohm resistor between WeMos BatteryShield +Vbat & A0
+
