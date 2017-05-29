@@ -32,8 +32,9 @@
 //#define WITH_BATTERY
 // Remove "//" once to clean up spiffs
 //#define CLEAN_UP
-
+temperatureIntervalSetting
 const int DEFAULT_TEMPERATURE_INTERVAL = 300;
+
 
 // choose correct sensor and pin
 DHT dht(D4, DHT22);
@@ -88,7 +89,7 @@ void temperature_humidity_metering() {
 
 
 void loopHandler() {
-  if (millis() - lastTemperatureSent >= temperatureIntervalSetting.get() * 1000UL || lastTemperatureSent == 0) {
+  if (millis() - lastTemperatureSent >= temperatureIntervalSetting * 1000UL || lastTemperatureSent == 0) {
     delay(6000);
     #ifdef WITH_BATTERY
       voltage_metering();

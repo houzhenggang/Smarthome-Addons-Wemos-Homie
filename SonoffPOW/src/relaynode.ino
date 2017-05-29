@@ -25,17 +25,21 @@
 #include <Homie.h>
 //
 #include <ArduinoOTA.h>
+#include "power.h"
 //
 
 #define PIN_RELAY 12
 #define PIN_LED 15
 #define PIN_BUTTON 0
 #define INTERVAL 60
+ESP8266PowerClass power_read;
 //#define CLEAN_UP
-
+const int powerIntervalSetting = 10;
 unsigned long lastSent = 0;
 int relayState = LOW;
 bool stateChange = false;
+double voltage = 0, power = 0;
+unsigned long lastPowerSent = 0, lastVoltageSent = 0;
 
 int buttonState;
 int lastButtonState = LOW;
@@ -43,6 +47,8 @@ unsigned long lastDebounceTime = 0;
 unsigned long debounceDelay = 50;
 
 HomieNode switchNode("switch", "switch");
+HomieNode powerNode("power", "power");
+HomieNode voltageNode("voltage", "voltage");
 
 bool switchHandler(HomieRange range, String value) {
   if (value == "true") {
@@ -59,10 +65,28 @@ bool switchHandler(HomieRange range, String value) {
   return true;
 }
 
+void getPower() {
+  power = power_read.getPower();
+  voltage = power_read.getVoltage();
+}
+
 void setupHandler() {
+  powerNode.setProperty("unit").send("W");
+  voltageNode.setProperty("unit").send("V");
+
 }
 
 void loopHandler() {
+  if (millis() - lastPowerSent >= powerIntervalSetting * 1000UL || lastPowerSent == 0) {
+    delay(6000);
+  getPower();
+  Homie.getLogger() << "Power: " << power << " W" << endl;
+  Homie.getLogger() << "Voltage: " << voltage << " V" << endl;
+  powerNode.setProperty("power").send(String(power));
+  voltageNode.setProperty("voltage").send(String(voltage));
+  lastVoltageSent = millis();
+  lastPowerSent = millis();
+  }
 }
 
 void setup() {
@@ -71,14 +95,21 @@ void setup() {
   Serial.println();
   pinMode(PIN_RELAY, OUTPUT);
   digitalWrite(PIN_RELAY, LOW);
+  power_read.enableMeasurePower();
+  power_read.selectMeasureCurrentOrVoltage(VOLTAGE);
+  power_read.startMeasure();
 
-  Homie_setFirmware("SonoffS20", "1.1.3ota");
+  Homie_setFirmware("SonoffPOW", "1.1.4ota");
   Homie.setLedPin(PIN_LED, LOW).setResetTrigger(PIN_BUTTON, LOW, 5000);
 
   Homie.setSetupFunction(setupHandler);
   Homie.setLoopFunction(loopHandler);
 
   switchNode.advertise("on").settable(switchHandler);
+  powerNode.advertise("unit");
+  powerNode.advertise("watt");
+  voltageNode.advertise("unit");
+  voltageNode.advertise("volt");
   #ifdef CLEAN_UP
     Homie.reset();
   #endif
