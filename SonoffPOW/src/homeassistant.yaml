@@ -1,0 +1,24 @@
+switch:
+  - platform: mqtt
+    name: "example"
+    state_topic: "homie/5ccf7f923b8b/switch/on"
+    command_topic: "homie/5ccf7f923b8b/switch/on/set"
+    payload_on: "true"
+    payload_off: "false"
+    optimistic: false
+    qos: 0
+#   retain: true
+
+sensor:
+  - platform: mqtt
+    name: "example_Power"
+    state_topic: "homie/5ccf7f923b8b/power/power"
+    qos: 1
+    unit_of_measurement: "W"
+
+
+  - platform: mqtt
+    name: "example_Voltage"
+    state_topic: "homie/5ccf7f923b8b/voltage/voltage"
+    qos: 1
+    unit_of_measurement: "V"
